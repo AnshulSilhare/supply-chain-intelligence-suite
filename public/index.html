@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Intelligence Suite | Anshul Silhare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --bg: #090C10;
+            --surface: #0F141C;
+            --surface-card: #151B26;
+            --surface-hover: #1C2433;
+            --ink: #F0F3F8;
+            --muted: #8B949E;
+            --line: #222B38;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --primary: #4F80E2;
+            --primary-glow: rgba(79, 128, 226, 0.35);
+        }
+
+        [data-theme="light"] {
+            --bg: #F8FAFC;
+            --surface: #FFFFFF;
+            --surface-card: #F1F5F9;
+            --surface-hover: #E2E8F0;
+            --ink: #0F172A;
+            --muted: #64748B;
+            --line: #CBD5E1;
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --primary: #2563EB;
+            --primary-glow: rgba(37, 99, 235, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Top Nav */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4F80E2, #8B5CF6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .brand-name {
+            font-weight: 800;
+            font-size: 17px;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--ink);
+        }
+
+        .theme-btn {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(79, 128, 226, 0.12);
+            border: 1px solid rgba(79, 128, 226, 0.3);
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--ink) 30%, var(--muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 19px;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+        }
+
+        .h-stat {
+            text-align: center;
+        }
+
+        .h-stat-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--ink);
+        }
+
+        .h-stat-lbl {
+            font-size: 13px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        /* Projects Section */
+        .section-header {
+            margin: 60px 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .sec-title {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .sec-sub {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 36px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 36px;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--p-accent, var(--primary));
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .p-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--p-accent, var(--primary));
+            margin-bottom: 12px;
+        }
+
+        .p-title {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .p-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .p-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .p-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .p-feature-item i {
+            color: var(--p-accent, var(--primary));
+            margin-top: 3px;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .p-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            background: var(--surface-card);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .p-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--p-accent, var(--primary));
+            color: white;
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--surface-card);
+            border: 1px solid var(--line);
+            color: var(--ink);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--muted);
+        }
+
+        /* Preview Panel */
+        .preview-box {
+            background: var(--surface-card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--surface);
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .metric-title {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .metric-val {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 48px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-brand strong {
+            color: var(--ink);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-socials a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--ink);
+        }
+
+        @media (max-width: 900px) {
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Nav -->
+        <nav class="nav">
+            <a href="#" class="brand">
+                <div class="brand-logo">
+                    <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
+                </div>
+                <span class="brand-name">Supply Chain Intelligence Suite</span>
+            </a>
+            <div class="nav-actions">
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="https://github.com/AnshulSilhare" target="_blank" class="nav-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/anshulsilhare" target="_blank" class="nav-link">LinkedIn</a>
+                <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+                    <i data-lucide="sun" id="themeIcon" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+                    Production-Grade Machine Learning & Orchestration
+                </div>
+                <h1 class="hero-title">Autonomous Supply Chain Intelligence Suite</h1>
+                <p class="hero-subtitle">
+                    A three-pillar enterprise ecosystem uniting real-time workflow automation, multi-horizon demand forecasting, and predictive logistics risk analytics into actionable decision intelligence.
+                </p>
+                <div class="hero-stats">
+                    <div class="h-stat">
+                        <div class="h-stat-num">3</div>
+                        <div class="h-stat-lbl">Deployed Systems</div>
+                    </div>
+                    <div class="h-stat">
+                        <div class="h-stat-num">11</div>
+                        <div class="h-stat-lbl">Automation Pipelines</div>
+                    </div>
+                    <div class="h-stat">
+                        <div class="h-stat-num">8</div>
+                        <div class="h-stat-lbl">Interactive Dashboards</div>
+                    </div>
+                    <div class="h-stat">
+                        <div class="h-stat-num">94.8%</div>
+                        <div class="h-stat-lbl">Model Accuracy</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Projects -->
+        <section id="projects">
+            <div class="section-header">
+                <div>
+                    <h2 class="sec-title">Enterprise Ecosystem Modules</h2>
+                    <p class="sec-sub">Three specialized standalone applications engineered for different tiers of supply chain operations.</p>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <!-- 1. Control Tower -->
+                <article class="project-card" style="--p-accent: #4F80E2;">
+                    <div>
+                        <span class="p-tag"><i data-lucide="shield-check"></i> System 01 &bull; Autonomous Orchestration</span>
+                        <h3 class="p-title">Supply Chain AI Control Tower</h3>
+                        <p class="p-desc">
+                            Autonomous operations platform with 8 live dashboard views, 11 orchestrated n8n workflows, real-time Google Sheets database integration, and Gemini AI root-cause synthesis.
+                        </p>
+                        <ul class="p-features">
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>3-tier automated PO delay escalation with AI-generated mitigation emails</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>Multi-dimensional supplier scorecard with automated A-D performance grading</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>Quality incident root-cause analysis triggering automated SCAR requests</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>Executive daily morning operations briefing aggregating 7 operational dimensions</span>
+                            </li>
+                        </ul>
+                        <div class="p-badges">
+                            <span class="badge">n8n Engine</span>
+                            <span class="badge">Google Sheets DB</span>
+                            <span class="badge">Gemini 3.5 Flash</span>
+                            <span class="badge">Docker</span>
+                            <span class="badge">Render</span>
+                        </div>
+                        <div class="p-actions">
+                            <a href="https://supply-chain-control-tower.onrender.com" target="_blank" class="btn btn-primary">
+                                <i data-lucide="external-link"></i> Launch Control Tower
+                            </a>
+                            <a href="https://github.com/AnshulSilhare/supplier-escalation-automation" target="_blank" class="btn btn-secondary">
+                                <i data-lucide="github"></i> View Repository
+                            </a>
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="metric-row">
+                            <span class="metric-title">Active PO Tracking</span>
+                            <span class="metric-val" style="color: #4CAF50;">Live Sync</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Automated Workflows</span>
+                            <span class="metric-val" style="color: #4F80E2;">11 Active</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Avg SLA Resolution</span>
+                            <span class="metric-val" style="color: #A78BFA;">-42% Faster</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Architecture Cost</span>
+                            <span class="metric-val" style="color: #F59E0B;">$0/mo (Free Tier)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. DemandSense -->
+                <article class="project-card" style="--p-accent: #10B981;">
+                    <div>
+                        <span class="p-tag"><i data-lucide="trending-up"></i> System 02 &bull; Predictive Forecasting</span>
+                        <h3 class="p-title">DemandSense AI Forecasting Engine</h3>
+                        <p class="p-desc">
+                            Enterprise SKU-level demand forecasting system incorporating time-series seasonal decomposition, holiday/festival calendar multipliers, and dynamic safety stock recommendations.
+                        </p>
+                        <ul class="p-features">
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>Multi-horizon SKU forecasting across regional distribution hubs</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>Indian festival calendar multipliers (Diwali, Holi, Eid) with uplift simulation</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>ABC-XYZ SKU classification and dynamic reorder point optimization</span>
+                            </li>
+                        </ul>
+                        <div class="p-badges">
+                            <span class="badge">FastAPI</span>
+                            <span class="badge">Prophet / XGBoost</span>
+                            <span class="badge">Time-Series ML</span>
+                            <span class="badge">Python</span>
+                            <span class="badge">Render</span>
+                        </div>
+                        <div class="p-actions">
+                            <a href="https://demandsense-engine.onrender.com" target="_blank" class="btn btn-primary" style="background: #10B981;">
+                                <i data-lucide="external-link"></i> Launch DemandSense
+                            </a>
+                            <a href="https://github.com/AnshulSilhare" target="_blank" class="btn btn-secondary">
+                                <i data-lucide="github"></i> View Repository
+                            </a>
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="metric-row">
+                            <span class="metric-title">Forecast WAPE</span>
+                            <span class="metric-val" style="color: #10B981;">&lt; 6.2%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Stockout Reduction</span>
+                            <span class="metric-val" style="color: #4F80E2;">-34%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Lead Time Coverage</span>
+                            <span class="metric-val" style="color: #A78BFA;">7 - 30 Days</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. DataCo -->
+                <article class="project-card" style="--p-accent: #EC4899;">
+                    <div>
+                        <span class="p-tag"><i data-lucide="truck"></i> System 03 &bull; Logistics Risk Intelligence</span>
+                        <h3 class="p-title">DataCo Predictive Delivery Engine</h3>
+                        <p class="p-desc">
+                            Machine learning logistics classifier predicting late delivery risks and shipment delays before dispatch, complete with SHAP feature explainability and carrier benchmarking.
+                        </p>
+                        <ul class="p-features">
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>XGBoost late-delivery risk probability scoring for outbound shipments</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>SHAP feature importance revealing shipping mode and geographical delay drivers</span>
+                            </li>
+                            <li class="p-feature-item">
+                                <i data-lucide="check-circle-2"></i>
+                                <span>Carrier performance comparisons and route rerouting suggestions</span>
+                            </li>
+                        </ul>
+                        <div class="p-badges">
+                            <span class="badge">FastAPI</span>
+                            <span class="badge">XGBoost</span>
+                            <span class="badge">SHAP Explainability</span>
+                            <span class="badge">Scikit-Learn</span>
+                            <span class="badge">Render</span>
+                        </div>
+                        <div class="p-actions">
+                            <a href="https://dataco-engine.onrender.com" target="_blank" class="btn btn-primary" style="background: #EC4899;">
+                                <i data-lucide="external-link"></i> Launch DataCo Engine
+                            </a>
+                            <a href="https://github.com/AnshulSilhare" target="_blank" class="btn btn-secondary">
+                                <i data-lucide="github"></i> View Repository
+                            </a>
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="metric-row">
+                            <span class="metric-title">Model AUC-ROC</span>
+                            <span class="metric-val" style="color: #EC4899;">0.924</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Inference Latency</span>
+                            <span class="metric-val" style="color: #10B981;">&lt; 45ms</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-title">Delay Mitigation</span>
+                            <span class="metric-val" style="color: #4F80E2;">82% Flagged</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-brand">
+                Built by <strong>Anshul Silhare</strong> &bull; End-to-End Supply Chain AI & ML Systems
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/AnshulSilhare" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/anshulsilhare" target="_blank">LinkedIn</a>
+                <a href="mailto:anshulsilhare19@gmail.com">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('suite-theme', next);
+            updateThemeUI(next);
+        }
+
+        function updateThemeUI(theme) {
+            const isDark = theme === 'dark';
+            document.getElementById('themeIcon').setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+            lucide.createIcons();
+        }
+
+        const savedTheme = localStorage.getItem('suite-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeUI(savedTheme);
+    </script>
+</body>
+</html>
